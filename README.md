@@ -1,39 +1,39 @@
-## Fancy directory listing with Flask for web servers
+## Fancy directory listing with [flask](http://flask.pocoo.org/) for web servers
 
 web servers allow to serve the content of folders, but generally in a pretty poor way :
 
-![Ngnix default directory listing](https://github.com/patatetom/fancypy/blob/master/default.png "Ngnix default directory listing")
+![ngnix default directory listing](https://github.com/patatetom/fancypy/blob/master/default.png "ngnix default directory listing")
 
-with FancyPy, you can simply and easily redefine the layout :
+with fancypy, you can simply and easily redefine the layout :
 
-![FancyPy directory listing](https://github.com/patatetom/fancypy/blob/master/fancypy.png "FancyPy directory listing")
+![fancypy directory listing](https://github.com/patatetom/fancypy/blob/master/fancypy.png "fancypy directory listing")
 
 ---
 
 
 ## Installation
 
-*(in this example of installation, FancyPy is behind the Nginx web server : adjust the procedure to your case)*
+*(in this example of installation, fancypy is behind the nginx web server : adjust the procedure to your case)*
 
-* install [Flask](http://flask.pocoo.org/docs/0.11/installation/)
+* install [flask](http://flask.pocoo.org/docs/0.11/installation/)
 * create a new user named «fancypy» :
 ```
 # useradd -m -c "Fancy directory listing with Flask" -g nginx -N fancypy
 ```
-* copy «fancypy» and «fancypy.html» to fancypy home directory :
+* copy `fancypy` and `fancypy.html` in the fancypy home directory :
 ```
 # wget -P /home/fancypy/ https://raw.githubusercontent.com/patatetom/fancypy/master/fancypy
 # wget -P /home/fancypy/ https://raw.githubusercontent.com/patatetom/fancypy/master/fancypy.html
 ```
-* check the code of fancypy python script ;-)
-* make fancypy executable :
+* change/check the code of the fancypy python script ;-)
+* make the fancypy python script executable :
 ```
 # chmod +x /home/fancypy/fancypy
 ```
 * install fancypy service with systemd :
 ```
 # echo "[Unit]
-Description=Fancy directory listing with Flask
+Description=Fancy directory listing with flask
 After=network.target nginx.service
 [Service]
 ExecStart=/home/fancypy/fancypy &
@@ -58,9 +58,9 @@ WantedBy=multi-user.target
 
 ## Configuration
 
-*(in this example of configuration, FancyPy is behind the Nginx web server : adjust the procedure to your case)*
+*(in this example of configuration, fancypy is behind the nginx web server : adjust the procedure to your case)*
 
-the `/clam/` directory was served by Ngnix with this simple configuration :
+the `/clam/` directory was served by ngnix with this simple configuration :
 
 ```
 # cat /etc/nginx/nginx.conf
@@ -73,7 +73,7 @@ location /clam/ {
 ...
 ```
 
-once FancyPy installed, the directory can be served with this configuration :
+once fancypy installed, the directory can be served with this simple configuration :
 
 ```
 # cat /etc/nginx/nginx.conf
@@ -100,7 +100,7 @@ location ~ ^/(clam|clam/.*)/$ {
 
 ## Template
 
-FancyPy will search for the template `fancypy.html` first in the «root+uri» directory and finally fallback in the fancypy home directory. the template will be automaticly removed from listing.
+fancypy will search for the template `fancypy.html` first in the «root+uri» directory and finally fallback in the fancypy home directory. the template will be automaticly removed from listing.
 
 *(here «root» is `/var/www/` and «uri» is `/clam/`)*
 
@@ -132,4 +132,4 @@ FancyPy will search for the template `fancypy.html` first in the «root+uri» di
 </body>
 </html>
 ```
-the most important part of the html code is `{{listing|safe}}` : this is where FancyPy will place directory listing.
+the most important part of the template is `{{listing|safe}}` : this is where fancypy will place directory listing.
