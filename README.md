@@ -97,3 +97,4 @@ it will be automaticly removed from listing.
 </body>
 </html>
 ```
+the important part of code is `{{listing|safe}}` : this is place where FancyPy will place directory listing.
