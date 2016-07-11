@@ -58,7 +58,12 @@ WantedBy=multi-user.target
 
 ## Configuration
 
-*(in this example of configuration, fancypy is behind the nginx web server : adjust the procedure to your case)*
+### Apache
+
+*todo*
+
+
+### Nginx
 
 the `/clam/` directory was served by ngnix with this simple configuration :
 
