@@ -18,7 +18,7 @@ with FancyPy, you can simply and easily redefine the layout :
 * install [Flask](http://flask.pocoo.org/docs/0.11/installation/)
 * create a new user named «fancypy» :
 ```
-# useradd -m -c "Fancy indexing with Flask" -g nginx -N fancypy
+# useradd -m -c "Fancy directory listing with Flask" -g nginx -N fancypy
 ```
 * copy «fancypy» and «fancypy.html» to fancypy home directory :
 ```
@@ -29,4 +29,18 @@ with FancyPy, you can simply and easily redefine the layout :
 * make fancypy executable :
 ```
 # chmod +x /home/fancypy/fancypy
+```
+* install fancypy service with systemd :
+```
+# echo "[Unit]
+Description=Fancy directory listing with Flask
+After=network.target nginx.service
+[Service]
+ExecStart=/home/fancypy/fancypy &
+User=fancypy
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/fancypy.service
+# systemctl enable fancypy
+# systemctl start fancypy
 ```
