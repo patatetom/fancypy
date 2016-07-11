@@ -100,7 +100,7 @@ location ~ ^/(clam|clam/.*)/$ {
 
 ## Template
 
-FancyPy will search for the template `fancypy.html` first in the «root+uri» directory and finally fallback in fancypy home directory. the template will be automaticly removed from listing.
+FancyPy will search for the template `fancypy.html` first in the «root+uri» directory and finally fallback in the fancypy home directory. the template will be automaticly removed from listing.
 
 *(here «root» is `/var/www/` and «uri» is `/clam/`)*
 
