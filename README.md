@@ -1,2 +1,32 @@
-# fancypy
-Fancy directory listing with Flask for web servers
+# FancyPy
+
+***Fancy directory listing with Flask for web servers***
+
+web servers allow to serve the content of folders, but generally in a pretty poor way :
+
+![Ngnix default directory listing](https://github.com/patatetom/fancypy/blob/master/default.png "Ngnix default directory listing")
+
+with FancyPy, you can simply and easily redefine the layout :
+
+![FancyPy directory listing](https://github.com/patatetom/fancypy/blob/master/fancypy.png "FancyPy directory listing")
+
+
+## Installation
+
+*(in this example of installation, FancyPy is behind the Nginx web server : adjust the procedure to your case)*
+
+* install [Flask](http://flask.pocoo.org/docs/0.11/installation/)
+* create a new user named «fancypy» :
+```
+# useradd -m -c "Fancy indexing with Flask" -g nginx -N fancypy
+```
+* copy «fancypy» and «fancypy.html» to fancypy home directory :
+```
+# wget -P /home/fancypy/ https://raw.githubusercontent.com/patatetom/fancypy/master/fancypy
+# wget -P /home/fancypy/ https://raw.githubusercontent.com/patatetom/fancypy/master/fancypy.html
+```
+* check the code of fancypy python script ;-)
+* make fancypy executable :
+```
+# chmod +x /home/fancypy/fancypy
+```
