@@ -42,5 +42,13 @@ User=fancypy
 WantedBy=multi-user.target
 " > /etc/systemd/system/fancypy.service
 # systemctl enable fancypy
+...
 # systemctl start fancypy
+```
+* check fancypy service :
+```
+# systemctl status fancypy
+...
+# wget http://localhost:5000 -O-
+:-(
 ```
