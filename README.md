@@ -49,7 +49,7 @@ WantedBy=multi-user.target
 ```
 # systemctl status fancypy
 ...
-# wget http://localhost:5000 -O-
+# wget -q -O /dev/stdout http://localhost:5000
 :-(
 ```
 
