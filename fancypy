@@ -1,0 +1,51 @@
+#!/usr/bin/env python2
+# coding=utf-8
+
+import sys
+from os import listdir, sep
+from os.path import isdir, isfile, join, getmtime, getsize, normpath
+from datetime import datetime
+from flask import Flask, render_template, request
+
+def gethsize(path):
+	size = getsize(path)
+	if not size / 1024 : return str(size) +'o'
+	if not size / 1024 / 1024 : return str(size / 1024) + 'Ko'
+	if not size / 1024 / 1024 / 1024 : return str(size / 1024 / 1024) + 'Mo'
+	if not size / 1024 / 1024 / 1024 / 1024 : return str(size / 1024 / 1024 / 1024) + 'Go'
+	return str(size / 1024 / 1024 / 1024 / 1024) + 'To'
+
+def gethtime(path):
+	timestamp = getmtime(path)
+	return datetime.fromtimestamp(timestamp).strftime('%d-%m-%Y&nbsp;%H:%M')
+
+fancypy = Flask(__name__)
+# set no cache for template
+fancypy.jinja_env.cache = None
+
+@fancypy.route('/')
+def index():
+	root = request.args.get('root', '')
+	uri = request.args.get('uri', '')
+	if root and uri :
+		root = root.rstrip(sep)
+		uri = uri.lstrip(sep)
+		path = normpath(join(root, uri))
+		if isdir(path) :
+			# build directory listing
+			items = listdir(path)
+			items.sort()
+			dirs = [item for item in items if isdir(join(path, item))]
+			dirs = [u'<li><a href="%s/">%s...</a></li>'%(item, item) for item in dirs]
+			files = [item for item in items if isfile(join(path, item)) and item != 'fancypy.html']
+			files = [u'<li><a href="%s">%s</a>&nbsp;&nbsp;<span style="color: gray;">(%s&nbsp;&nbsp;%s)</span></li>'%(item, item, gethsize(join(path,item)), gethtime(join(path,item))) for item in files]
+			listing = '\n'.join(dirs + files)
+			# change template search path
+			path = normpath(join(root, uri.split(sep)[0]))
+			fancypy.jinja_loader.searchpath = [path, fancypy.root_path]
+			# return html page
+			return render_template('fancypy.html', listing=listing)
+		return ':-('
+	return ':-('
+
+fancypy.run(threaded=True)
