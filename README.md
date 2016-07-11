@@ -1,5 +1,3 @@
-# FancyPy
-
 ## Fancy directory listing with Flask for web servers
 
 web servers allow to serve the content of folders, but generally in a pretty poor way :
@@ -62,7 +60,7 @@ WantedBy=multi-user.target
 
 *(in this example of configuration, FancyPy is behind the Nginx web server : adjust the procedure to your case)*
 
-the /clam/ directory was served by Ngnix with this simple configuration :
+the `/clam/` directory was served by Ngnix with this simple configuration :
 
 ```
 # cat /etc/nginx/nginx.conf
@@ -86,7 +84,7 @@ location /clam/ {
  ...
 ```
 
-if directory contains subdirectories, the configuration may be this :
+if directory contains subdirectories, the configuration may be :
 
 ```
 # cat /etc/nginx/nginx.conf
@@ -102,8 +100,10 @@ location ~ ^/(clam|clam/.*)/$ {
 
 ## Template
 
-FancyPy will search for the template «fancypy.html» first in the «root+uri» directory and finally in fancypy home directory.
-it will be automaticly removed from listing.
+FancyPy will search for the template `fancypy.html` first in the «root+uri» directory and finally fallback in fancypy home directory. the template will be automaticly removed from listing.
+
+*(here «root» is `/var/www/` and «uri» is `/clam/`)*
+
 ```html
 # cat /var/www/clam/fancypy.html 
 <!DOCTYPE html>
@@ -132,4 +132,4 @@ it will be automaticly removed from listing.
 </body>
 </html>
 ```
-the most important part of code is `{{listing|safe}}` : this is place where FancyPy will place directory listing.
+the most important part of the html code is `{{listing|safe}}` : this is where FancyPy will place directory listing.
