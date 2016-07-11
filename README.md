@@ -62,6 +62,41 @@ WantedBy=multi-user.target
 
 *(in this example of configuration, FancyPy is behind the Nginx web server : adjust the procedure to your case)*
 
+the /clam/ directory was served by Ngnix with this simple configuration :
+
+```
+# cat /etc/nginx/nginx.conf
+...
+location /clam/ {
+ autoindex on;
+ autoindex_localtime on;
+ autoindex_exact_size off;
+}
+...
+```
+
+once FancyPy installed, the directory can be served with this configuration :
+
+```
+# cat /etc/nginx/nginx.conf
+...
+location /clam/ {
+ proxy_pass http://127.0.0.1:5000/?root=$document_root&uri=$request_uri;
+}
+ ...
+```
+
+if directory contains subdirectories, the configuration may be this :
+
+```
+# cat /etc/nginx/nginx.conf
+...
+location ~ ^/(clam|clam/.*)/$ {
+ proxy_pass http://127.0.0.1:5000/?root=$document_root&uri=$request_uri;
+}
+...
+```
+
 ---
 
 
@@ -97,4 +132,4 @@ it will be automaticly removed from listing.
 </body>
 </html>
 ```
-the important part of code is `{{listing|safe}}` : this is place where FancyPy will place directory listing.
+the most important part of code is `{{listing|safe}}` : this is place where FancyPy will place directory listing.
