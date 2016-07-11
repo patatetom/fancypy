@@ -18,7 +18,7 @@ with fancypy, you can simply and easily redefine the layout :
 * install [flask](http://flask.pocoo.org/docs/0.11/installation/)
 * create a new user named «fancypy» :
 ```
-# useradd -m -c "Fancy directory listing with Flask" -g nginx -N fancypy
+# useradd -m -c "Fancy directory listing with flask" -g nginx -N fancypy
 ```
 * copy `fancypy` and `fancypy.html` in the fancypy home directory :
 ```
