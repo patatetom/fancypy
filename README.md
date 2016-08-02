@@ -1,4 +1,4 @@
-## Fancy directory listing with [flask](http://flask.pocoo.org/) for web servers
+## Fancy directory listing with [Flask](http://flask.pocoo.org/) for web servers
 
 web servers allow to serve the content of folders, but generally in a pretty poor way :
 
@@ -133,7 +133,6 @@ fancypy will search for the template `fancypy.html` first in the «root+uri» di
 </div>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/docs.min.js"></script>
 </body>
 </html>
 ```
