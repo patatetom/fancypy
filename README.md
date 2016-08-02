@@ -15,7 +15,7 @@ with fancypy, you can simply and easily redefine the layout :
 
 *(in this example of installation, fancypy is behind the nginx web server : adjust the procedure to your case)*
 
-* install [flask](http://flask.pocoo.org/docs/0.11/installation/)
+* install [Flask](http://flask.pocoo.org/docs/0.11/installation/)
 * create a new user named «fancypy» :
 ```
 # useradd -m -c "Fancy directory listing with flask" -g nginx -N fancypy
